@@ -1,14 +1,14 @@
 # 微服务追踪
-微服务提供了一个强大的体系结构，但并非没有自己的挑战，特别是在调试和观察复杂网络中的分布式事务方面 - 仅仅因为没有内存调用或堆栈跟踪 
+微服务提供了一个强大的体系结构，但并非没有自己的挑战，特别是在调试和观察复杂网络中的分布式事务方面 - 仅仅因为没有内存调用或堆栈跟踪
 
 
 
 ## 分布式追踪数据模型
-![model1](images/model1.png)
+![model1](./images/model1.png)
 
 1. Trace: 事务在分布式系统中移动时的描述
 2. Span：表示工作流程的一个命名的定时操作。 Spans接受k/v标签以及附加到特定跨度实例的细粒度，带时间戳的结构化日志。
-3. Span context: 
+3. Span context:
 跟踪分布式事务所伴随的信息，包括通过网络或通过消息总线将服务传递给服务的时间。 span上下文包含跟踪标识符，span标识符以及跟踪系统需要传播到下游服务的任何其他数据。
 
 
@@ -33,7 +33,7 @@ OpenTracing API提供了标准，跨语言的框架, [详细教程](https://gith
 #### 快速开始
 **场景:**  ServiceA 的一个接口 test 会进行一次mysql查询， 投递消息到kafka, 访问一个第三方服务druid
 
-  
+
 
 步骤:
 1. 启动Jaeger
@@ -86,35 +86,34 @@ class Hello(tornado.web.RequestHandler):
 
     def get(self, *args, **kwargs):
         flag = self.request.uri + ":" + self.request.method
-    
+
         with tracer.start_active_span(flag) as scope:
             self.connect_druid()
             self.connect_mysql()
             self.connect_kafka()
-            
+
             self.write("Hello")
-            
+
     def connect_mysql(self):
         with tracer.start_active_span('connect mysql') as scope:
             ....
-    
+
     def connect_kafka(self):
         with tracer.start_active_span('produce to kafka') as scope:
             ....
-            
+
     def connect_druid(self):
         with tracer.start_active_span('connect druid') as scope:
             ....
-    
+
 ```
 
 4. 访问serviceA这个接口, 从Jaeger UI追踪服务
-![trace](images/trace.png)
+![trace](./images/trace.png)
 
 
 
 ##### 总结
-1. 基于OpenTracing能够实现微服务全io的监控, 易于查找问题,  
+1. 基于OpenTracing能够实现微服务全io的监控, 易于查找问题,
 2. 对业务代码有侵入型， 业务端引入是否方便还得考量。
-3. 加上opentracing会不会对原服务的性能造成影响。 
-
+3. 加上opentracing会不会对原服务的性能造成影响。

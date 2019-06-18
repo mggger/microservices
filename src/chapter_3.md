@@ -1,15 +1,16 @@
 # 微服务日志收集
+
 微服务体系由于服务数量比较多， 当需要查看日志时, 一个个的去查看似乎不太现实。于是便出现了elasticsearch，这种日志收集服务
 
 ## 原理
 1. 服务端输出日志到文件
-2. fluentd 根据tail解析日志文件， 发送到elesticsearch 
+2. fluentd 根据tail解析日志文件， 发送到elesticsearch
 
 ### 实现
 附上一个ansible-playbook, 需要指定目标机器，和配置文件
 
 
-``` yaml 
+``` yaml
 
 - hosts: "{{ host }}"
   tasks:
@@ -83,3 +84,4 @@
     flush_interval 3s
 </match>
 ```
+

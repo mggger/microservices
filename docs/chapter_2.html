@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>微服务追踪 - 微服务学习笔记</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 服务注册与发现</a></li><li><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> 微服务追踪</a></li><li><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> 微服务日志收集</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">微服务学习笔记</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#微服务追踪" id="微服务追踪"><h1>微服务追踪</h1></a>
+<p>微服务提供了一个强大的体系结构，但并非没有自己的挑战，特别是在调试和观察复杂网络中的分布式事务方面 - 仅仅因为没有内存调用或堆栈跟踪</p>
+<a class="header" href="#分布式追踪数据模型" id="分布式追踪数据模型"><h2>分布式追踪数据模型</h2></a>
+<p><img src="./images/model1.png" alt="model1" /></p>
+<ol>
+<li>Trace: 事务在分布式系统中移动时的描述</li>
+<li>Span：表示工作流程的一个命名的定时操作。 Spans接受k/v标签以及附加到特定跨度实例的细粒度，带时间戳的结构化日志。</li>
+<li>Span context:
+跟踪分布式事务所伴随的信息，包括通过网络或通过消息总线将服务传递给服务的时间。 span上下文包含跟踪标识符，span标识符以及跟踪系统需要传播到下游服务的任何其他数据。</li>
+</ol>
+<a class="header" href="#opentracing" id="opentracing"><h3>OpenTracing</h3></a>
+<p>OpenTracing API提供了标准，跨语言的框架, <a href="https://github.com/yurishkuro/opentracing-tutorial">详细教程</a></p>
+<p>本文以python作为示例。</p>
+<a class="header" href="#jaeger" id="jaeger"><h3>Jaeger</h3></a>
+<p>它用于监视和排除基于微服务的分布式系统</p>
+<ul>
+<li>分布式上下文传播</li>
+<li>分布式事务监控</li>
+<li>服务依赖性分析</li>
+<li>根本原因分析</li>
+<li>性能/延迟优化</li>
+</ul>
+<p><a href="https://www.jaegertracing.io/docs/1.11/">详细文档</a></p>
+<a class="header" href="#快速开始" id="快速开始"><h4>快速开始</h4></a>
+<p><strong>场景:</strong>  ServiceA 的一个接口 test 会进行一次mysql查询， 投递消息到kafka, 访问一个第三方服务druid</p>
+<p>步骤:</p>
+<ol>
+<li>启动Jaeger</li>
+</ol>
+<pre><code class="language-shell">docker run -d --name jaeger \
+  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
+  -p 5775:5775/udp \
+  -p 6831:6831/udp \
+  -p 6832:6832/udp \
+  -p 5778:5778 \
+  -p 16686:16686 \
+  -p 14268:14268 \
+  -p 9411:9411 \
+  jaegertracing/all-in-one:1.11
+</code></pre>
+<ol start="2">
+<li>实现tracer</li>
+</ol>
+<pre><code class="language-python">import logging
+from jaeger_client import Config
+
+
+def init_tracer(service):
+    logging.getLogger('').handlers = []
+    logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+
+    config = Config(
+        config={  # usually read from some yaml config
+            'sampler': {
+                'type': 'const',
+                'param': 1,
+            },
+            'logging': True,
+            'reporter_batch_size': 1,
+        },
+        service_name=service,
+    )
+
+    # this call also sets opentracing.tracer
+    return config.initialize_tracer()
+</code></pre>
+<ol start="3">
+<li>加上span的逻辑</li>
+</ol>
+<pre><code class="language-python">import tornado.web
+
+tracer = init_tracer(&quot;serviceA&quot;)
+
+class Hello(tornado.web.RequestHandler):
+
+    def get(self, *args, **kwargs):
+        flag = self.request.uri + &quot;:&quot; + self.request.method
+
+        with tracer.start_active_span(flag) as scope:
+            self.connect_druid()
+            self.connect_mysql()
+            self.connect_kafka()
+
+            self.write(&quot;Hello&quot;)
+
+    def connect_mysql(self):
+        with tracer.start_active_span('connect mysql') as scope:
+            ....
+
+    def connect_kafka(self):
+        with tracer.start_active_span('produce to kafka') as scope:
+            ....
+
+    def connect_druid(self):
+        with tracer.start_active_span('connect druid') as scope:
+            ....
+
+</code></pre>
+<ol start="4">
+<li>访问serviceA这个接口, 从Jaeger UI追踪服务
+<img src="./images/trace.png" alt="trace" /></li>
+</ol>
+<a class="header" href="#总结" id="总结"><h5>总结</h5></a>
+<ol>
+<li>基于OpenTracing能够实现微服务全io的监控, 易于查找问题,</li>
+<li>对业务代码有侵入型， 业务端引入是否方便还得考量。</li>
+<li>加上opentracing会不会对原服务的性能造成影响。</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="chapter_3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="chapter_3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
